@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHNOLOGYAA | Semiconductor Future</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #00f2ff; /* Neon Cyan */
+            --secondary: #7000ff; /* Deep Purple */
+            --dark: #050505;
+            --light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .creator {
+            font-size: 12px;
+            color: #888;
+            margin-left: 10px;
+            border-left: 1px solid #444;
+            padding-left: 10px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .btn-signup {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-signup:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        /* HERO SECTION WITH 3D CANVAS */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 20px var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CONTENT SECTION */
+        .section {
+            padding: 80px 50px;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(to bottom, var(--dark), #0a0a0a);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.1);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* MODAL FORMS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: #111;
+            padding: 40px;
+            width: 400px;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div>
+            <div class="logo">TECHNOLOGYAA<span class="creator">| Built by Manvinder Rai</span></div>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn" onclick="openModal('login')">Sign In</button>
+            <button class="btn btn-signup" onclick="openModal('register')">Register</button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH 3D ANIMATION -->
+    <section class="hero">
+        <div id="canvas-container"></div>
+        <div class="hero-content">
+            <h1>TECHNOLOGY<span style="color:var(--primary)">AA</span></h1>
+            <p>Powering the Future of Semiconductors</p>
+            <br>
+            <button class="btn" style="margin-top: 20px;">Explore Technology</button>
+        </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section class="section">
+        <h2 class="section-title">Understanding Semiconductors</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-microchip" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>What is a Semiconductor?</h3>
+                <p>A semiconductor is a substance, usually a solid chemical element or compound, that has a specific electrical resistivity. It is neither a full conductor (like copper) nor an insulator (like rubber). Its conductivity lies between these two extremes.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-atom" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>The Silicon Base</h3>
+                <p>Silicon is the core of the modern electronics industry. By doping silicon with other elements (like Boron or Phosphorus), we create "N-type" or "P-type" silicon, which allows electricity to flow in a controlled way, acting as a switch.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-rocket" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>Applications</h3>
+                <p>From smartphones and laptops to EVs and AI servers, semiconductors are the "brain". India is now pushing heavily into manufacturing these chips to power the next generation of technology.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTH MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" style="margin-bottom: 20px; color: var(--primary);">Register</h2>
+            
+            <form id="auth-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create password" required>
+                </div>
+                <button type="submit" class="submit-btn">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 TECHNOLOGYAA. Designed by Manvinder Rai. All Rights Reserved.</p>
+    </footer>
+
+    <!-- THREE.JS LIBRARY (For 3D Effects) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // --- 3D ANIMATION SCRIPT ---
+        function init3D() {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Create a complex geometric shape representing a Chip/Molecule
+            const geometry = new THREE.IcosahedronGeometry(10, 1);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0x00f2ff, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            scene.add(sphere);
+
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 700;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 50;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                color: 0x7000ff
+            });
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 20;
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                sphere.rotation.x += 0.005;
+                sphere.rotation.y += 0.005;
+                
+                particlesMesh.rotation.y = -0.002;
+                
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Window Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
